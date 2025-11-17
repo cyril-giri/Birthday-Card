@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Birthday Card</title>
+<style>
+    body {
+         background: black;
+        text-align: center;
+        padding-top: 60px;
+        overflow-x: hidden;
+        font-family: Arial, sans-serif;
+        text-align: center;
+        padding-top: 60px;
+        overflow-x: hidden;
+    }
+
+    @keyframes bgMove {
+        0% { background-position: 0% 50%; }
+        100% { background-position: 100% 50%; }
+    }
+
+    .open-link {
+        font-size: 20px;
+        display: inline-block;
+        padding: 12px 25px;
+        background: #ff3f6c;
+        color: white;
+        text-decoration: none;
+        border-radius: 10px;
+        cursor: pointer;
+    }
+
+    /* Popup background */
+    .popup-bg {
+        display: none;
+        position: fixed;
+        top: 0; left: 0;
+        width: 100%; height: 100%;
+        background: rgba(0,0,0,0.4);
+        backdrop-filter: blur(3px);
+        justify-content: center;
+        align-items: center;
+        z-index: 10;
+    }
+
+    .card {
+        width: 380px;
+        background: white;
+        padding: 25px;
+        border-radius: 20px;
+        box-shadow: 0 0 25px rgba(0,0,0,0.3);
+        animation: pop 0.4s ease;
+        text-align: center;
+        position: relative;
+    }
+
+    @keyframes pop {
+        from { transform: scale(0.5); opacity: 0; }
+        to { transform: scale(1); opacity: 1; }
+    }
+
+    h1 {
+        color: #ff3f6c;
+        margin-bottom: 10px;
+        font-size: 30px;
+    }
+
+    .message {
+        font-size: 18px;
+        color: #444;
+        margin-bottom: 12px;
+    }
+
+    /* Cake */
+    .cake {
+        position: relative;
+        width: 200px;
+        height: 140px;
+        background: #ffb347;
+        margin: 20px auto;
+        border-radius: 10px;
+    }
+
+    .icing {
+        width: 200px;
+        height: 45px;
+        background: #ffe1f0;
+        border-radius: 18px 18px 0 0;
+        position: absolute;
+        top: -25px;
+        left: 0;
+    }
+
+    /* Candles */
+    .candle {
+        width: 12px;
+        height: 40px;
+        background: #fff;
+        position: absolute;
+        bottom: 110px;
+        border-radius: 3px;
+    }
+
+    .c1 { left: 50px; background:#ff7a7a; }
+    .c2 { left: 95px; background:#7ab6ff; }
+    .c3 { left: 140px; background:#8aff7a; }
+
+    .flame {
+        width: 12px;
+        height: 18px;
+        background: gold;
+        border-radius: 50%;
+        position: absolute;
+        top: -18px;
+        animation: flicker 0.8s infinite alternate;
+    }
+
+    @keyframes flicker {
+        from { transform: scale(1); opacity: 1; }
+        to { transform: scale(0.8); opacity: 0.7; }
+    }
+
+    /* Name on cake */
+    .cake-name {
+        position: absolute;
+        bottom: 10px;
+        left: 0;
+        width: 100%;
+        text-align: center;
+        font-weight: bold;
+        color: #61210f;
+        font-size: 18px;
+    }
+
+    /* Balloons */
+    .balloon {
+        position: absolute;
+        width: 50px;
+        height: 70px;
+        background: red;
+        border-radius: 50%;
+        animation: float 6s infinite ease-in-out;
+        opacity: 0.8;
+    }
+
+    @keyframes float {
+        0% { transform: translateY(100vh) rotate(0deg); }
+        100% { transform: translateY(-120vh) rotate(10deg); }
+    }
+
+    /* Different balloon colors */
+    .b1 { left: 10%; background:#ff6b6b; animation-duration: 7s; }
+    .b2 { left: 40%; background:#6bcfff; animation-duration: 6s; }
+    .b3 { left: 70%; background:#8aff7a; animation-duration: 8s; }
+
+    /* Strings */
+    .string {
+        width: 2px;
+        height: 40px;
+        background: #333;
+        position: absolute;
+        top: 70px;
+        left: 24px;
+    }
+
+    .close-btn {
+        margin-top: 15px;
+        padding: 8px 15px;
+        background: #ff3f6c;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+    }
+
+    /* Confetti */
+    .confetti {
+        position: fixed;
+        width: 10px;
+        height: 10px;
+        background: yellow;
+        top: -10px;
+        animation: fall 4s infinite ease-in;
+        z-index: 20;
+    }
+
+    @keyframes fall {
+        from { transform: translateY(0) rotate(0deg); }
+        to { transform: translateY(110vh) rotate(360deg); }
+    }
+
+</style>
+</head>
+<body>
+
+<a class="open-link" onclick="openCard()">Open Birthday Card 🎁</a>
+
+<!-- Balloons -->
+<div class="balloon b1"><div class="string"></div></div>
+<div class="balloon b2"><div class="string"></div></div>
+<div class="balloon b3"><div class="string"></div></div>
+
+<!-- Popup -->
+<div class="popup-bg" id="popup">
+    <div class="card">
+        <h1>Happy Birthday Dawg!🥰</h1>
+
+        <small><div class="message">I wanted to get you something amazing but then i remembered you already have me😎You're welcome</div></small><br>
+
+
+        <div class="cake">
+            <div class="icing"></div>
+
+            <div class="candle c1"><div class="flame"></div></div>
+            <div class="candle c2"><div class="flame"></div></div>
+            <div class="candle c3"><div class="flame"></div></div>
+
+            <B><div class="cake-name">CYRIL</diV><B>
+        </div>
+
+        <button class="close-btn" onclick="closeCard()">Close</button>
+    </div>
+</div>
+
+<script>
+function openCard() {
+    document.getElementById('popup').style.display = 'flex';
+    createConfetti();
+}
+
+function closeCard() {
+    document.getElementById('popup').style.display = 'none';
+    document.querySelectorAll(".confetti").forEach(e => e.remove());
+}
+
+/* Confetti creator */
+function createConfetti() {
+    for (let i = 0; i < 40; i++) {
+        let c = document.createElement("div");
+        c.classList.add("confetti");
+        c.style.left = Math.random() * 100 + "vw";
+        c.style.background = randomColor();
+        c.style.animationDelay = Math.random() * 2 + "s";
+        c.style.animationDuration = 3 + Math.random() * 3 + "s";
+        document.body.appendChild(c);
+    }
+}
+
+function randomColor() {
+    const colors = ["#ff6b6b", "#ffd93d", "#6bcfff", "#8aff7a", "#ff9a3c"];
+    return colors[Math.floor(Math.random()*colors.length)];
+}
+</script>
+
+</body>
+</html>
